@@ -1,16 +1,14 @@
 package com.mongo.cosmos;
 
-import com.mongo.cosmos.model.FormularioVista;
+import com.mongo.cosmos.repository.AlaAzulRepository;
+import com.mongo.cosmos.repository.ConfiguratorRepository;
+import com.mongo.cosmos.repository.FolioRepository;
 import com.mongo.cosmos.repository.FormularioVistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class CosmosApplication implements CommandLineRunner {
@@ -21,9 +19,20 @@ public class CosmosApplication implements CommandLineRunner {
 
     @Autowired
     private FormularioVistaRepository formularioVistaRepository;
+    @Autowired
+    private AlaAzulRepository alaAzulRepository;
+    @Autowired
+    private ConfiguratorRepository configuratorRepository;
+    @Autowired
+    private FolioRepository folioRepository;
 
     @Override
     public void run(String... args) throws Exception {
+
+        alaAzulRepository.deleteAll();
+        configuratorRepository.deleteAll();
+        folioRepository.deleteAll();
+
 //        formularioVistaRepository.deleteAll();
 //        FormularioVista formularioVista = new FormularioVista();
 //

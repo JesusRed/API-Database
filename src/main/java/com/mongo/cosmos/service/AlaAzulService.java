@@ -22,6 +22,7 @@ public class AlaAzulService {
 
     private final ConfiguratorRepository configuratorRepository;
     private final FolioService folioService;
+    private final AlaAzulRepository alaAzulRepository;
 
     public AlaAzul saveAlaAzul(@RequestBody AlaAzul alaAzul) {
         //buscar la id compuesta en configurator
@@ -41,6 +42,7 @@ public class AlaAzulService {
             alaAzul.setConfigurator(configuratorOptional);
             // añade el folio a la alaazul
             alaAzul.setFolio(folio.getFolio());
+            alaAzulRepository.save(alaAzul);
         }else {
             //error 404
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Configuration not found");
