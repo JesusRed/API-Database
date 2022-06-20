@@ -1,7 +1,5 @@
 package com.mongo.cosmos.model;
 
-import com.mongo.cosmos.model.FormularioVistaModel.Access;
-import com.mongo.cosmos.model.FormularioVistaModel.Component;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -36,7 +33,7 @@ public class FormularioVista {
     private String name;
     private String path;
     private String project;
-    private LocalDateTime created;
+    private String created;
     private String modified;
     private Object machineName;
 }

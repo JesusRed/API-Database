@@ -1,9 +1,9 @@
 package com.mongo.cosmos.controller;
 
-import com.azure.core.annotation.Post;
 import com.mongo.cosmos.model.FormularioVista;
 import com.mongo.cosmos.service.FormularioVistaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +23,8 @@ public class FormularioVistaController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<FormularioVista> addFormularioVista(@Valid @RequestBody FormularioVista formularioVista){
-
+    public ResponseEntity<FormularioVista> addFormularioVista(@Valid @RequestBody FormularioVista formularioVista) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(formularioVistaService.addFormularioVista(formularioVista));
     }
 
 }
