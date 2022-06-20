@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/configurator")
 @RequiredArgsConstructor
-public class ConfigurationController {
+public class ConfiguratorController {
     private final ConfiguratorService configuratorService;
 
     @PostMapping("/add")

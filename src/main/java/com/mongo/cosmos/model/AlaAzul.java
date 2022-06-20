@@ -13,8 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @AllArgsConstructor
 @Document("AlaAzul")
 public class AlaAzul {
-    @Field(name = "_id")
-    private String id;
+    private String _id;
     private String product;
     private String allyId;
     private String gatewayId;
