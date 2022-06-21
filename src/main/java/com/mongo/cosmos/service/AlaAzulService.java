@@ -3,8 +3,9 @@ package com.mongo.cosmos.service;
 import com.mongo.cosmos.model.AlaAzul;
 import com.mongo.cosmos.model.Configurator;
 import com.mongo.cosmos.model.Folio;
-import com.mongo.cosmos.repository.persistencerepository.AlaAzulRepository;
 import com.mongo.cosmos.repository.configurationrepository.ConfiguratorRepository;
+import com.mongo.cosmos.repository.configurationrepository.FolioRepository;
+import com.mongo.cosmos.repository.persistencerepository.AlaAzulRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ public class AlaAzulService {
 
     private final ConfiguratorRepository configuratorRepository;
     private final FolioService folioService;
+    private final FolioRepository folioRepository;
 
     private final AlaAzulRepository alaAzulRepository;
 
@@ -36,27 +38,36 @@ public class AlaAzulService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Collection exists");
         } else {
             //buscar la id compuesta en configurator
-            Optional<Configurator> configuratorOptional = configuratorRepository
-                    .findByProductAndAllyIdAndGatewayId(
-                            alaAzul.getProduct(), alaAzul.getAllyId(), alaAzul.getGatewayId()
-                    );
+            Optional<Configurator> configuratorOptional = configuratorRepository.findByProductAndAllyIdAndGatewayId(alaAzul.getProduct(), alaAzul.getAllyId(), alaAzul.getGatewayId());
             // si existe el configurador se crea el folio
-            if (!configuratorOptional.isPresent()) {
-                //error 404
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Configuration not found");
+            if (configuratorOptional.isEmpty()) {
+                //error 400
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Configuration not found");
             }
-            //inserta el folio
-            Folio folio = new Folio();
-            folio.setProduct(alaAzul.getProduct());
-            folio.setAllyId(alaAzul.getAllyId());
-            folio.setGatewayId(alaAzul.getGatewayId());
-            folioService.insertFolio(folio);
-            // añade la configuracion a alaazul
+            //inserta el configurator
             alaAzul.setConfigurator(configuratorOptional.get());
-            // añade el folio a la alaazul
-            alaAzul.setFolio(folio.getFolio());
-            //guarda el alaazul
+            //crea el folio
+            Folio folioOptional = folioRepository.findByProductAndAllyIdAndGatewayId(alaAzul.getProduct(), alaAzul.getAllyId(), alaAzul.getGatewayId());
+            if (folioOptional != null) {
+                //se actualiza en el folio en el alaazul
+                alaAzul.setFolio(folioOptional.getFolio());
+                //se hace +1 en el folio registrado
+
+                //guarda la coleccion
+                alaAzulRepository.save(alaAzul);
+            }
+            //crea el folio
+            Folio f = new Folio();
+            f.setProduct(alaAzul.getProduct());
+            f.setAllyId(alaAzul.getAllyId());
+            f.setGatewayId(alaAzul.getGatewayId());
+
+            //se inserta 1 en el alaazul
+            alaAzul.setFolio(1);
+            //guarda la coleccion
             alaAzulRepository.save(alaAzul);
+
+
             return alaAzul;
         }
     }

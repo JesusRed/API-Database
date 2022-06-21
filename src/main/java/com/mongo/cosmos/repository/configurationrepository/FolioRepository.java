@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface FolioRepository extends MongoRepository<Folio, String> {
-    Optional<Folio> findByProductAndAllyIdAndGatewayId(String product, String allyId, String gatewayId);
+    Folio findByProductAndAllyIdAndGatewayId(String product, String allyId, String gatewayId);
+
 }

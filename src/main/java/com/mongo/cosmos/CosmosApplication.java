@@ -1,5 +1,6 @@
 package com.mongo.cosmos;
 
+import com.mongo.cosmos.model.Folio;
 import com.mongo.cosmos.repository.configurationrepository.ConfiguratorRepository;
 import com.mongo.cosmos.repository.configurationrepository.FolioRepository;
 import com.mongo.cosmos.repository.persistencerepository.AlaAzulRepository;
@@ -31,6 +32,13 @@ public class CosmosApplication implements CommandLineRunner {
         folioRepository.deleteAll();
         configuratorRepository.deleteAll();
         alaAzulRepository.deleteAll();
+
+        Folio f = new Folio();
+        f.setProduct("AlaAzul");
+        f.setAllyId("COTIZADORES_SURA");
+        f.setGatewayId("agente");
+        f.setFolio(2);
+        folioRepository.save(f);
 
 
 //        formularioVistaRepository.deleteAll();
