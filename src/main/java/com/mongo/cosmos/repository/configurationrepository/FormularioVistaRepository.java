@@ -1,4 +1,4 @@
-package com.mongo.cosmos.repository;
+package com.mongo.cosmos.repository.configurationrepository;
 
 import com.mongo.cosmos.model.FormularioVista;
 import org.springframework.data.mongodb.repository.MongoRepository;

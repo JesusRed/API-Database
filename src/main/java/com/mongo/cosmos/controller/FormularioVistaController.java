@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +21,7 @@ public class FormularioVistaController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<FormularioVista> addFormularioVista(@Valid @RequestBody FormularioVista formularioVista) {
+    public ResponseEntity<FormularioVista> addFormularioVista(@RequestBody FormularioVista formularioVista) {
         return ResponseEntity.status(HttpStatus.CREATED).body(formularioVistaService.addFormularioVista(formularioVista));
     }
 

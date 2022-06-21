@@ -1,10 +1,9 @@
 package com.mongo.cosmos.service;
 
 import com.mongo.cosmos.model.Folio;
-import com.mongo.cosmos.repository.FolioRepository;
+import com.mongo.cosmos.repository.configurationrepository.FolioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,7 +15,7 @@ public class FolioService {
 
     private final FolioRepository folioRepository;
 
-    private final MongoTemplate configurationMongoTemplate;
+
 
     public void insertFolio(Folio folio){
         //buscar por producto
@@ -31,8 +30,8 @@ public class FolioService {
         }else {
             //si el folio no existe se guarda;
             folio.setFolio(1);
-//            folioRepository.save(folio);
-            configurationMongoTemplate.insert(folio, "folio");
+            folioRepository.save(folio);
+            //configurationMongoTemplate.insert(folio, "folio");
             log.info("folio inserted");
         }
     }

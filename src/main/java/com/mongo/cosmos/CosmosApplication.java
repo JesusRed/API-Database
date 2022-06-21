@@ -1,15 +1,15 @@
 package com.mongo.cosmos;
 
+import com.mongo.cosmos.repository.configurationrepository.ConfiguratorRepository;
+import com.mongo.cosmos.repository.configurationrepository.FolioRepository;
+import com.mongo.cosmos.repository.persistencerepository.AlaAzulRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
-import org.springframework.data.mongodb.core.MongoTemplate;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class CosmosApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
@@ -18,14 +18,19 @@ public class CosmosApplication implements CommandLineRunner {
 
     //    @Autowired
 //    private FormularioVistaRepository formularioVistaRepository;
-
     @Autowired
-    MongoTemplate persistenceMongoTemplate;
+    private ConfiguratorRepository configuratorRepository;
     @Autowired
-    MongoTemplate configurationMongoTemplate;
+    private AlaAzulRepository alaAzulRepository;
+    @Autowired
+    private FolioRepository folioRepository;
 
     @Override
     public void run(String... args) throws Exception {
+
+        folioRepository.deleteAll();
+        configuratorRepository.deleteAll();
+        alaAzulRepository.deleteAll();
 
 
 //        formularioVistaRepository.deleteAll();

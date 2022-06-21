@@ -1,4 +1,4 @@
-package com.mongo.cosmos.repository;
+package com.mongo.cosmos.repository.configurationrepository;
 
 import com.mongo.cosmos.model.Configurator;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -8,5 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface ConfiguratorRepository extends MongoRepository<Configurator, String> {
-    Optional<Configurator>  findByProductAndAllyIdAndGatewayId(String product, String allyId, String gatewayId);
+    Optional<Configurator> findByProductAndAllyIdAndGatewayId(String product, String allyId, String gatewayId);
+    //Optional<Configurator> findByProduct(String product);
 }
