@@ -30,7 +30,7 @@ public class AlaAzulService {
 
     //private final MongoTemplate persistenceMongoTemplate;
 
-    public AlaAzul saveAlaAzul(@RequestBody AlaAzul alaAzul) {
+    public Folio saveAlaAzul(@RequestBody AlaAzul alaAzul) {
         Optional<AlaAzul> alaAzulOptional = alaAzulRepository.findByConfigurator(alaAzul.getConfigurator());
         // validar que si exista y ese existente tenga configurator
         if (alaAzulOptional.isPresent()) {
@@ -42,7 +42,7 @@ public class AlaAzulService {
             // si existe el configurador se crea el folio
             if (configuratorOptional.isEmpty()) {
                 //error 400
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Configuration not found");
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Configuration not found");
             }
             //inserta el configurator
             alaAzul.setConfigurator(configuratorOptional.get());
@@ -52,15 +52,27 @@ public class AlaAzulService {
             f.setProduct(alaAzul.getProduct());
             f.setAllyId(alaAzul.getAllyId());
             f.setGatewayId(alaAzul.getGatewayId());
-            if (folio1.isPresent()) {
-                alaAzul.setFolio(folio1.get().getFolio());
-            } else {
+            if (folio1.isEmpty()) {
                 folioService.newFolio(f);
+                f.setFolio(1);
                 //se inserta el folio en el alaazul
                 alaAzul.setFolio(1);
+                return f;
             }
+            alaAzul.setFolio(folio1.get().getFolio());
             //guarda la coleccion
-            return alaAzulRepository.save(alaAzul);
+            alaAzulRepository.save(alaAzul);
+            return folio1.get();
         }
+    }
+
+    public AlaAzul getAlaAzul(String allyId, String product, String gatewayId, int folio) {
+        Optional<AlaAzul> alaAzulOptional = alaAzulRepository.findByAllyIdAndProductAndGatewayIdAndFolio(allyId, product, gatewayId, folio);
+        if (alaAzulOptional.isPresent()) {
+            log.info("searching persistence: {}", alaAzulOptional.get());
+            return alaAzulOptional.get();
+        }
+        log.info("persistence not found");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Persistence not found");
     }
 }

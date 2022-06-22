@@ -1,5 +1,6 @@
 package com.mongo.cosmos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Document("AlaAzul")
+@JsonIgnoreProperties(value = { "_id" })
 public class AlaAzul {
     @Id
     @Field(name = "_id")

@@ -1,5 +1,6 @@
 package com.mongo.cosmos;
 
+import com.mongo.cosmos.model.Configurator;
 import com.mongo.cosmos.model.Folio;
 import com.mongo.cosmos.repository.configurationrepository.ConfiguratorRepository;
 import com.mongo.cosmos.repository.configurationrepository.FolioRepository;
@@ -9,6 +10,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class CosmosApplication implements CommandLineRunner {
@@ -39,7 +43,6 @@ public class CosmosApplication implements CommandLineRunner {
         f.setGatewayId("agente");
         f.setFolio(2);
         folioRepository.save(f);
-
 
 //        formularioVistaRepository.deleteAll();
 //        FormularioVista formularioVista = new FormularioVista();
