@@ -1,5 +1,7 @@
 package com.mongo.cosmos.config;
 
+import com.mongo.cosmos.model.AlaAzul;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -50,5 +52,4 @@ public class MultipleMongoConfig {
                 mongo.getUri()
         );
     }
-
 }

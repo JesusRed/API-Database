@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Document("folios")
-@JsonIgnoreProperties(value = { "_id" })
+@JsonIgnoreProperties(value = {"_id"})
 public class Folio {
     @Id
     @Field(name = "_id")

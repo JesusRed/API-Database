@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,14 +20,14 @@ public class FolioService {
     public Folio updateFolio(Folio folio) {
         Optional<Folio> f = folioRepository.findByProductAndAllyIdAndGatewayId(folio.getProduct(), folio.getAllyId(), folio.getGatewayId());
         if (f.isPresent()) {
-            f.get().setFolio(f.get().getFolio()+1);
+            f.get().setFolio(f.get().getFolio() + 1);
             log.info("folio updated {}: ", f);
             return folioRepository.save(f.get());
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Folio exists");
     }
 
-    public Folio newFolio(Folio folio){
+    public Folio newFolio(Folio folio) {
         folio.setFolio(1);
         log.info("folio saved");
         return folioRepository.save(folio);

@@ -1,6 +1,5 @@
 package com.mongo.cosmos;
 
-import com.mongo.cosmos.model.Configurator;
 import com.mongo.cosmos.model.Folio;
 import com.mongo.cosmos.repository.configurationrepository.ConfiguratorRepository;
 import com.mongo.cosmos.repository.configurationrepository.FolioRepository;
@@ -10,9 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class CosmosApplication implements CommandLineRunner {
@@ -35,7 +32,6 @@ public class CosmosApplication implements CommandLineRunner {
 
         folioRepository.deleteAll();
         configuratorRepository.deleteAll();
-        alaAzulRepository.deleteAll();
 
         Folio f = new Folio();
         f.setProduct("AlaAzul");

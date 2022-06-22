@@ -15,12 +15,12 @@ public class AlaAzulController {
     private final AlaAzulService alaAzulService;
 
     @PostMapping("/new")
-    public ResponseEntity<Folio> saveAlaAzul(@RequestBody AlaAzul alaAzul){
+    public ResponseEntity<Folio> saveAlaAzul(@RequestBody AlaAzul alaAzul) {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(alaAzulService.saveAlaAzul(alaAzul));
     }
 
     @GetMapping("/{allyId}/{product}/{gatewayId}/{folio}")
-    public ResponseEntity<AlaAzul> getAlaAzul(@PathVariable String allyId,@PathVariable String product,@PathVariable String gatewayId, @PathVariable int folio){
+    public ResponseEntity<AlaAzul> getAlaAzul(@PathVariable String allyId, @PathVariable String product, @PathVariable String gatewayId, @PathVariable int folio) {
         return ResponseEntity.status(HttpStatus.OK).body(alaAzulService.getAlaAzul(allyId, product, gatewayId, folio));
     }
 }

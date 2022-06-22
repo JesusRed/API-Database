@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface FormularioVistaRepository extends MongoRepository<FormularioVista, String> {
-     Optional<FormularioVista> findByName(String name);
+    Optional<FormularioVista> findByName(String name);
 }

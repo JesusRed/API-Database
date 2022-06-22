@@ -19,14 +19,14 @@ public class FormularioVistaService {
 
     private final FormularioVistaRepository formularioVistaRepository;
 
-//  COMPLETO:  LISTAR TODOS LOS FORMVIEWS
+    //  COMPLETO:  LISTAR TODOS LOS FORMVIEWS
     public List<FormularioVista> getAllFormularioVista() {
         log.info("Showing all collections from FormularioVista");
         return formularioVistaRepository.findAll();
         //throw new  ResponseStatusException(HttpStatus.OK, "List of FormularioVista");
     }
 
-//    INCOMPLETO: RECIBIR Y GUARDAR EL FORMULARIO TENIENDO EN CUENTA LA FECHA
+    //    INCOMPLETO: RECIBIR Y GUARDAR EL FORMULARIO TENIENDO EN CUENTA LA FECHA
     public FormularioVista addFormularioVista(FormularioVista formularioVista) {
         Optional<FormularioVista> formularioVistaOptional = formularioVistaRepository.findByName(formularioVista.getName());
         if (formularioVistaOptional.isPresent()) {

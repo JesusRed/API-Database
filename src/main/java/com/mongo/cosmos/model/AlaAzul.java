@@ -11,8 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-@Document("AlaAzul")
-@JsonIgnoreProperties(value = { "_id" })
+//@Document("AlaAzul")
+@JsonIgnoreProperties(value = {"_id"})
 public class AlaAzul {
     @Id
     @Field(name = "_id")

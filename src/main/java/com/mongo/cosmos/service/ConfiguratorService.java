@@ -14,7 +14,7 @@ public class ConfiguratorService {
     private final ConfiguratorRepository configuratorRepository;
 
 
-    public Configurator createConfigurator(Configurator configurator){
+    public Configurator createConfigurator(Configurator configurator) {
         // falta validación
         return configuratorRepository.save(configurator);
         //return configurationMongoTemplate.insert(configurator, "configurator");
