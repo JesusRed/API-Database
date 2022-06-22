@@ -47,10 +47,10 @@ public class AlaAzulService {
             //inserta el configurator
             alaAzul.setConfigurator(configuratorOptional.get());
             //crea el folio
-            Folio folioOptional = folioRepository.findByProductAndAllyIdAndGatewayId(alaAzul.getProduct(), alaAzul.getAllyId(), alaAzul.getGatewayId());
-            if (folioOptional != null) {
+            Optional<Folio> folioOptional = folioRepository.findByProductAndAllyIdAndGatewayId(alaAzul.getProduct(), alaAzul.getAllyId(), alaAzul.getGatewayId());
+            if (folioOptional.isPresent()) {
                 //se actualiza en el folio en el alaazul
-                alaAzul.setFolio(folioOptional.getFolio());
+                alaAzul.setFolio(folioOptional.get().getFolio());
                 //se hace +1 en el folio registrado
 
                 //guarda la coleccion

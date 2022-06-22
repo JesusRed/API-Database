@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Document("viewforms")
 public class FormularioVista {
+    @Id
     @Field(name = "_id")
     private String id;
     private String type;
