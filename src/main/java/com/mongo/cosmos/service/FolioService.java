@@ -4,7 +4,9 @@ import com.mongo.cosmos.model.Folio;
 import com.mongo.cosmos.repository.configurationrepository.FolioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +25,10 @@ public class FolioService {
             log.info("folio updated {}: ", f);
             return folioRepository.save(f.get());
         }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Folio exists");
+    }
+
+    public Folio newFolio(Folio folio){
         folio.setFolio(1);
         log.info("folio saved");
         return folioRepository.save(folio);
